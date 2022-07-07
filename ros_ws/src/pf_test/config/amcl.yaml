@@ -1,0 +1,24 @@
+particle_filter:
+  ros__parameters:
+    angle_step: 18
+    fine_timing: 0
+    max_particles: 3900
+    max_range: 10
+    max_viz_particles: 1
+    motion_dispersion_theta: 0.25
+    motion_dispersion_x: 0.05
+    motion_dispersion_y: 0.025
+    odometry_topic: /vesc/odom
+    publish_odom: 1
+    range_method: rmgpu
+    rangelib_variant: 2
+    scan_topic: /scan
+    sigma_hit: 8.0
+    squash_factor: 2.2
+    theta_discretization: 125
+    update_time: 0.0245
+    viz: 0
+    z_hit: 0.75
+    z_max: 0.07
+    z_rand: 0.12
+    z_short: 0.01
