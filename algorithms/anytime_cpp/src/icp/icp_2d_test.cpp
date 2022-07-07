@@ -172,7 +172,7 @@ int main() {
 
 	kdtree.query(source, 1, indices, distances);
 
-	Map<Array<long long, Dynamic, Dynamic>> idx_long(indices.data(), indices.cols(), indices.rows());
+	Map<Array<Index, Dynamic, Dynamic>> idx_long(indices.data(), indices.cols(), indices.rows());
 
 	ArrayXi idx = idx_long.cast<int>();
 
