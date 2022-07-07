@@ -116,7 +116,7 @@ MatrixXf transformPointCloud(MatrixXf ptcloud, MatrixXf T) {
 }
 
 int main() {
-	CSVData csv("D:/Documents/Summer_22/UPenn_Research/ICP_CPP/scanData.csv", MatrixXf::Zero(1, 1));
+	CSVData csv("../data/scanData.csv", MatrixXf::Zero(1, 1));
 	MatrixXf r = csv.readFromCSVFile().transpose();
 	r = (r.array() < 50).select(r, 0.00);
 	ArrayXf angle = ArrayXf::LinSpaced(1081, -3 * PI / 4, 3 * PI / 4);
@@ -144,7 +144,7 @@ int main() {
 
 	cout << 0 << endl;
 
-	CSVData sv("D:/Documents/Summer_22/UPenn_Research/ICP_CPP/testPointCloud.csv", target_tf);
+	CSVData sv("../data/testPointCloud.csv", target_tf);
 
 	sv.writeToCSVFile();
 

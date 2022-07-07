@@ -127,7 +127,7 @@ MatrixXf transformPointCloud(MatrixXf ptcloud, MatrixXf T) {
 
 int main() {
 
-	CSVData csv("scanData.csv", MatrixXf::Zero(1, 1));
+	CSVData csv("../data/scanData.csv", MatrixXf::Zero(1, 1));
 	MatrixXf r = csv.readFromCSVFile().transpose();
 	r = (r.array() < 50).select(r, 0.00);
 	ArrayXf angle = ArrayXf::LinSpaced(1081, -3 * PI / 4, 3 * PI / 4);

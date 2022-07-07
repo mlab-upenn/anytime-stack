@@ -61,7 +61,7 @@ int main() {
 
 	cout << "This works so far" << endl;
 
-	CSVData csv("D:/Documents/Summer_22/UPenn_Research/ICP_CPP/scanData.csv", MatrixXf::Zero(2, 2));
+	CSVData csv("../data/scanData.csv", MatrixXf::Zero(2, 2));
 	MatrixXf r = csv.readFromCSVFile().transpose();
 	ArrayXf angle = ArrayXf::LinSpaced(1081, -3 * PI / 4, 3 * PI / 4);
 	// cout << r.col(0) << endl;
