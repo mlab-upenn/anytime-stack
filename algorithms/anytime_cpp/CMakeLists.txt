@@ -1,19 +1,19 @@
 cmake_minimum_required(VERSION 3.5)
 project(anytime_cpp)
 
-# Default to C99
 if (NOT CMAKE_C_STANDARD)
-  set(CMAKE_C_STANDARD 99)
+	set(CMAKE_C_STANDARD 99)
 endif ()
 
-# Default to C++14
 if (NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+	# TODO: Or do we need C++17?
+	set(CMAKE_CXX_STANDARD 14)
 endif ()
 
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  # add_compile_options(-Wall -Wextra -Wpedantic -c -O3 -march=native -mtune=intel -std=gnu++17 -mavx2 -mfma -flto -fopenmp -fPIC -fno-math-errno -I/usr/local/include/eigen3/)
-  # add_compile_options(-Wall -Wextra -Wpedantic -c -MMD -pipe)
+	# TODO: consider enabling some of the flags
+	# add_compile_options(-Wall -Wextra -Wpedantic -c -O3 -march=native -mtune=intel -mavx2 -mfma -flto -fopenmp -fPIC -fno-math-errno)
+	# add_compile_options(-Wall -Wextra -Wpedantic -c -MMD -pipe)
 endif ()
 
 # find dependencies
