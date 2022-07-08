@@ -10,11 +10,17 @@ detect it as a CMake project. Then you can use it to build / run / debug specifi
 
 You can also build and run everything from terminal (using `cmake` CLI).
 
-[Eigen3] (tested with version 3.4.0) is required. The rest of the dependencies must be installed by running the
-following command in the project root:
+The dependencies (external libraries) can be installed by running the following commands in the project root:
 ```bash
-./download_dependencies.sh
+./dependencies_download.sh
+./dependencies_build.sh
 ```
+
+
+## Note about dependencies (external libraries)
+
+TODO: summarize findings and approaches
+
 
 [CMake]: https://cmake.org/
 

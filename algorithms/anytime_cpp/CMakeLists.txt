@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 project(anytime_cpp)
 
+# from CMake 3.15 there is PREPEND
+list(INSERT CMAKE_PREFIX_PATH 0 "${PROJECT_SOURCE_DIR}/libs/install")
+message("-- CMAKE_PREFIX_PATH CMake variable = " ${CMAKE_PREFIX_PATH})
+message("-- CMAKE_PREFIX_PATH env variable = " $ENV{CMAKE_PREFIX_PATH})
+
 if (NOT CMAKE_C_STANDARD)
 	set(CMAKE_C_STANDARD 99)
 endif ()
@@ -17,7 +22,10 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif ()
 
 # find dependencies
-find_package(Eigen3 REQUIRED)
+
+find_package(Eigen3 3.4.0 REQUIRED)
+find_package(lbfgspp 0.2.0 REQUIRED)
+message("-- Eigen3 version: " ${EIGEN3_VERSION_STRING})
 
 # general demos
 
@@ -41,24 +49,24 @@ add_executable(functor_test
 		src/icp/functor_test.cpp
 		src/csv_utils.cpp)
 target_link_libraries(functor_test Eigen3::Eigen)
-target_include_directories(functor_test PRIVATE lib/LBFGSpp/include)
+target_link_libraries(functor_test lbfgspp)
 
 add_executable(icp_2d_test
 		src/icp/icp_2d_test.cpp
 		src/csv_utils.cpp)
 target_link_libraries(icp_2d_test Eigen3::Eigen)
-target_include_directories(icp_2d_test PRIVATE lib/LBFGSpp/include)
+target_link_libraries(icp_2d_test lbfgspp)
 
 add_executable(knn_test
 		src/icp/knn_test.cpp
 		src/csv_utils.cpp)
 target_link_libraries(knn_test Eigen3::Eigen)
-target_include_directories(knn_test PRIVATE lib/LBFGSpp/include)
+target_link_libraries(knn_test lbfgspp)
 
 add_executable(solver_test
 		src/icp/solver_test.cpp)
 target_link_libraries(solver_test Eigen3::Eigen)
-target_include_directories(solver_test PRIVATE lib/LBFGSpp/include)
+target_link_libraries(solver_test lbfgspp)
 
 # add_executable(range_libc_test
 # 		range_libc_test.cpp)
