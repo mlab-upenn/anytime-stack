@@ -8,6 +8,7 @@
 // #include <Eigen/CXX11/Tensor>
 #include <unsupported/Eigen/CXX11/Tensor>
 #include <LBFGS.h>
+#include "../csv_utils.hpp"
 
 #define PI 3.1415926535
 
@@ -15,45 +16,6 @@ using namespace Eigen;
 using namespace std;
 
 typedef knncpp::Matrixi Matrixi;
-
-const static Eigen::IOFormat CSVFormat(Eigen::StreamPrecision, Eigen::DontAlignCols, ", ", "\n");
-
-class CSVData {
-public:
-	MatrixXf data;
-	string filename;
-
-	CSVData(string filename_, MatrixXf data_) {
-		filename = filename_;
-		data = data_;
-	}
-
-	void writeToCSVFile() {
-		ofstream file(filename.c_str());
-		file << data.format(CSVFormat);
-		file.close();
-	}
-
-	MatrixXf readFromCSVFile() {
-		vector<float> matrixEntries;
-		ifstream matrixDataFile(filename);
-		string matrixRowString;
-		string matrixEntry;
-		int matrixRowNumber = 0;
-
-		while (getline(matrixDataFile, matrixRowString)) {
-			stringstream matrixRowStringStream(matrixRowString);
-			while (getline(matrixRowStringStream, matrixEntry, ',')) {
-				matrixEntries.push_back(stod(matrixEntry));
-			}
-			matrixRowNumber++;
-		}
-
-		return Map<Matrix<float, Dynamic, Dynamic, RowMajor>>(matrixEntries.data(), matrixRowNumber,
-															  matrixEntries.size() / matrixRowNumber);
-	}
-};
-
 
 class PointCloudError {
 private:

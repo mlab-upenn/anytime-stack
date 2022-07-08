@@ -26,27 +26,32 @@ add_executable(hello_world
 target_link_libraries(hello_world Eigen3::Eigen)
 
 add_executable(high_dim_system
-		src/high_dim_system.cpp)
+		src/high_dim_system.cpp
+		src/csv_utils.cpp)
 target_link_libraries(high_dim_system Eigen3::Eigen)
 
 add_executable(low_variance_resampler
-		src/low_variance_resampler.cpp)
+		src/low_variance_resampler.cpp
+		src/csv_utils.cpp)
 target_link_libraries(low_variance_resampler Eigen3::Eigen)
 
 # ICP
 
 add_executable(functor_test
-		src/icp/functor_test.cpp)
+		src/icp/functor_test.cpp
+		src/csv_utils.cpp)
 target_link_libraries(functor_test Eigen3::Eigen)
 target_include_directories(functor_test PRIVATE lib/LBFGSpp/include)
 
 add_executable(icp_2d_test
-		src/icp/icp_2d_test.cpp)
+		src/icp/icp_2d_test.cpp
+		src/csv_utils.cpp)
 target_link_libraries(icp_2d_test Eigen3::Eigen)
 target_include_directories(icp_2d_test PRIVATE lib/LBFGSpp/include)
 
 add_executable(knn_test
-		src/icp/knn_test.cpp)
+		src/icp/knn_test.cpp
+		src/csv_utils.cpp)
 target_link_libraries(knn_test Eigen3::Eigen)
 target_include_directories(knn_test PRIVATE lib/LBFGSpp/include)
 

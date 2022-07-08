@@ -5,57 +5,12 @@
 #include <vector>
 #include <Eigen/Core>
 #include <unsupported/Eigen/KroneckerProduct>
+#include "csv_utils.hpp"
 
 using namespace std;
 using namespace Eigen;
 
-const static Eigen::IOFormat CSVFormat(
-	Eigen::StreamPrecision,
-	Eigen::DontAlignCols,
-	", ",
-	"\n"
-);
-
 #define PI 3.1415926535
-
-class CSVData {
-public:
-	MatrixXf data;
-	string filename;
-
-	CSVData(string filename_, MatrixXf data_) {
-		filename = move(filename_);
-		data = move(data_);
-	}
-
-	void writeToCSVFile() {
-		ofstream file(filename.c_str());
-		file << data.format(CSVFormat);
-		file.close();
-	}
-
-	MatrixXf readFromCSVFile() {
-		vector<float> matrixEntries;
-		ifstream matrixDataFile(filename);
-		string matrixRowString;
-		string matrixEntry;
-		int matrixRowNumber = 0;
-
-		while (getline(matrixDataFile, matrixRowString)) {
-			stringstream matrixRowStringStream(matrixRowString);
-			while (getline(matrixRowStringStream, matrixEntry, ',')) {
-				matrixEntries.push_back(stod(matrixEntry));
-			}
-			matrixRowNumber++;
-		}
-
-		return Map<Matrix<float, Dynamic, Dynamic, RowMajor>>(
-			matrixEntries.data(),
-			matrixRowNumber,
-			matrixEntries.size() / matrixRowNumber
-		);
-	}
-};
 
 class HighDimSystem {
 public:

@@ -7,6 +7,7 @@
 #include <Eigen/Core>
 #include <RangeLib.h>
 #include <gflags/gflags.h>
+#include "csv_utils.hpp"
 
 #define MAX_DISTANCE 500
 #define THETA_DISC 108
@@ -28,52 +29,6 @@ using namespace ranges;
 using namespace benchmark;
 using namespace std;
 using namespace Eigen;
-
-const static Eigen::IOFormat CSVFormat(
-	Eigen::StreamPrecision,
-	Eigen::DontAlignCols,
-	", ",
-	"\n"
-);
-
-class CSVData {
-public:
-	MatrixXf data;
-	string filename;
-
-	CSVData(string filename_, MatrixXf data_) {
-		filename = filename_;
-		data = data_;
-	}
-
-	void writeToCSVFile() {
-		ofstream file(filename.c_str());
-		file << data.format(CSVFormat);
-		file.close();
-	}
-
-	MatrixXf readFromCSVFile() {
-		vector<float> matrixEntries;
-		ifstream matrixDataFile(filename);
-		string matrixRowString;
-		string matrixEntry;
-		int matrixRowNumber = 0;
-
-		while (getline(matrixDataFile, matrixRowString)) {
-			stringstream matrixRowStringStream(matrixRowString);
-			while (getline(matrixRowStringStream, matrixEntry, ',')) {
-				matrixEntries.push_back(stod(matrixEntry));
-			}
-			matrixRowNumber++;
-		}
-
-		return Map<Matrix<float, Dynamic, Dynamic, RowMajor>>(
-			matrixEntries.data(),
-			matrixRowNumber,
-			matrixEntries.size() / matrixRowNumber
-		);
-	}
-};
 
 VectorXi choice_idx(VectorXf w) {
 	VectorXi w_rest = (w / w.minCoeff()).cast<int>();
