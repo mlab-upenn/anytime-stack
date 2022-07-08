@@ -1,0 +1,5 @@
+repositories:
+  # src/external/something:
+  #   type: git
+  #   url: xxx
+  #   version: yyy

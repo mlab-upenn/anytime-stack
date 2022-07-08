@@ -1,3 +1,57 @@
+### GENERAL
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.supported
+
+# common code editors
+.atom/
+.vscode/
+
+# JetBrains IDEs
+# see https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# note: in the future, we might version it
+.idea/
+
+# common files
+*.log
+
+# local-only files (may be useful during development)
+*.local.*
+*.local
+
+
+### PROJECT
+
+# colcon workspace
+/log/
+/install/
+/build/
+
+# symlink to ws/build/compile_commands.json for easily opening the project
+# in CLion as "Compilation Database Project"
+/compile_commands.json
+
+# correct PYTHONPATH for VSCode's pylint and other tools
+.env
+
+# Python caches
+__pycache__
+*~
+*.pyc
+*.swp
+
+# scripts output data
+*.npy
+
+# external repos (with ROS 2 packages)
+/src/external/
+
+# TODO: external libs
 CPP/LBFGSpp/
 range_libc/
 ros_ws/src/particle_filter/
