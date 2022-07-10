@@ -74,6 +74,7 @@ target_link_libraries(solver_test lbfgspp)
 if (WITH_CUDA)
 
 	find_package(CUDA REQUIRED)
+	message("-- CUDA version: " ${CUDA_VERSION_STRING})
 
 	cuda_add_executable(range_libc_test
 			src/range_libc_test.cpp

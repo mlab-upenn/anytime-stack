@@ -21,4 +21,4 @@ build_dir="cmake-build-${type}"
 
 rm -rf "$build_dir"
 # ^ > uppercase the first letter, i.e. debug > Debug
-cmake -DCMAKE_BUILD_TYPE="${type^}" -G "$generator" -B "$build_dir" .
+cmake -DCMAKE_BUILD_TYPE="${type^}" -G "$generator" -B "$build_dir" "$@" .
