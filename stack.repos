@@ -1,5 +1,9 @@
 repositories:
-  # src/external/something:
-  #   type: git
-  #   url: xxx
-  #   version: yyy
+  src/external/lbfgspp:
+    type: git
+    url: https://github.com/yixuan/LBFGSpp.git
+    version: master
+  src/external/Eigen3:
+    type: git
+    url: https://gitlab.com/libeigen/eigen.git
+    version: 3.4.0
