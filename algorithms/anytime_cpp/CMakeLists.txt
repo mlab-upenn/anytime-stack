@@ -70,31 +70,31 @@ add_executable(solver_test
 target_link_libraries(solver_test Eigen3::Eigen)
 target_link_libraries(solver_test lbfgspp)
 
-# range_libc_test
+# range_lib_test
 if (WITH_CUDA)
 
 	find_package(CUDA REQUIRED)
 	message("-- CUDA version: " ${CUDA_VERSION_STRING})
 
-	cuda_add_executable(range_libc_test
-			src/range_libc_test.cpp
+	cuda_add_executable(range_lib_test
+			src/range_lib_test.cpp
 			libs/src/range_lib/includes/kernels.cu
 			libs/src/range_lib/vendor/lodepng/lodepng.cpp)
 
-	target_compile_definitions(range_libc_test PRIVATE USE_CUDA=1)
-	target_compile_definitions(range_libc_test PRIVATE CHUNK_SIZE=${CHUNK_SIZE})
-	target_compile_definitions(range_libc_test PRIVATE NUM_THREADS=${CHUNK_THREADS})
+	target_compile_definitions(range_lib_test PRIVATE USE_CUDA=1)
+	target_compile_definitions(range_lib_test PRIVATE CHUNK_SIZE=${CHUNK_SIZE})
+	target_compile_definitions(range_lib_test PRIVATE NUM_THREADS=${CHUNK_THREADS})
 
 else ()
 
-	add_executable(range_libc_test
-			src/range_libc_test.cpp
+	add_executable(range_lib_test
+			src/range_lib_test.cpp
 			libs/src/range_lib/includes/kernels.cu
 			libs/src/range_lib/vendor/lodepng/lodepng.cpp)
 
-	target_compile_definitions(range_libc_test PRIVATE USE_CUDA=0)
+	target_compile_definitions(range_lib_test PRIVATE USE_CUDA=0)
 
 endif ()
-target_include_directories(range_libc_test PRIVATE libs/src/range_lib/includes)
-target_include_directories(range_libc_test PRIVATE libs/src/range_lib)
-target_link_libraries(range_libc_test Eigen3::Eigen)
+target_include_directories(range_lib_test PRIVATE libs/src/range_lib/includes)
+target_include_directories(range_lib_test PRIVATE libs/src/range_lib)
+target_link_libraries(range_lib_test Eigen3::Eigen)

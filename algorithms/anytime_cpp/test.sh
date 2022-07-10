@@ -22,6 +22,7 @@ set -x
 # TODO: high_dim_system is failing
 # ./high_dim_system
 ./low_variance_resampler
+./range_lib_test
 
 ./functor_test
 ./icp_2d_test
