@@ -70,21 +70,26 @@ add_executable(solver_test
 target_link_libraries(solver_test Eigen3::Eigen)
 target_link_libraries(solver_test lbfgspp)
 
-add_executable(range_libc_test
-		src/range_libc_test.cpp
-		libs/src/range_lib/includes/kernels.cu
-		libs/src/range_lib/vendor/lodepng/lodepng.cpp)
+# range_libc_test
 if (WITH_CUDA)
+
+	find_package(CUDA REQUIRED)
+
+	cuda_add_executable(range_libc_test ${CUDA_SRCS})
 
 	target_compile_definitions(range_libc_test PRIVATE USE_CUDA=1)
 	target_compile_definitions(range_libc_test PRIVATE CHUNK_SIZE=${CHUNK_SIZE})
 	target_compile_definitions(range_libc_test PRIVATE NUM_THREADS=${CHUNK_THREADS})
 
-	find_package(CUDA REQUIRED)
-	cuda_add_executable(range_libc_test ${CUDA_SRCS})
-
 else ()
+
+	add_executable(range_libc_test
+			src/range_libc_test.cpp
+			libs/src/range_lib/includes/kernels.cu
+			libs/src/range_lib/vendor/lodepng/lodepng.cpp)
+
 	target_compile_definitions(range_libc_test PRIVATE USE_CUDA=0)
+
 endif ()
 target_include_directories(range_libc_test PRIVATE libs/src/range_lib/includes)
 target_include_directories(range_libc_test PRIVATE libs/src/range_lib)
