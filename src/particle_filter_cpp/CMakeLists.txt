@@ -37,7 +37,8 @@ endif ()
 include_directories(include)
 
 add_executable(particle_filter src/particle_filter.cpp)
-ament_target_dependencies(particle_filter rclcpp std_msgs sensor_msgs nav_msgs Eigen3)
+target_link_libraries(particle_filter Eigen3::Eigen)
+ament_target_dependencies(particle_filter rclcpp std_msgs sensor_msgs nav_msgs)
 target_include_directories(particle_filter PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<INSTALL_INTERFACE:include>)
