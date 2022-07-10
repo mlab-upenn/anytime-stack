@@ -6,7 +6,6 @@
 #include <sstream>
 #include <Eigen/Core>
 #include <RangeLib.h>
-#include <gflags/gflags.h>
 #include "csv_utils.hpp"
 
 #define MAX_DISTANCE 500
@@ -42,8 +41,12 @@ VectorXi choice_idx(VectorXf w) {
 
 int main() {
 	OMap map = OMap(1, 1);
-	map = OMap("/home/schmidd/Documents/CPP/maps/basement_hallways_5cm.png");
+	map = OMap("../maps/basement_hallways_5cm.png");
 	int MAX_RANGE_PX = (int) (MAX_DISTANCE / 0.01);
-	RayMarchingGPU rmgpu(map, MAX_RANGE_PX);
+#if USE_CUDA == 1
+	RayMarchingGPU rm(map, MAX_RANGE_PX);
+#else
+	RayMarching rm(map, MAX_RANGE_PX);
+#endif
 	return 0;
 }

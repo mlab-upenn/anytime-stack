@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(anytime_cpp)
 
+option(WITH_CUDA "Compile CUDA ray cast variants" ON)
+
 # from CMake 3.15 there is PREPEND
 list(INSERT CMAKE_PREFIX_PATH 0 "${PROJECT_SOURCE_DIR}/libs/install")
 message("-- CMAKE_PREFIX_PATH CMake variable = " ${CMAKE_PREFIX_PATH})
@@ -68,9 +70,22 @@ add_executable(solver_test
 target_link_libraries(solver_test Eigen3::Eigen)
 target_link_libraries(solver_test lbfgspp)
 
-# add_executable(range_libc_test
-# 		range_libc_test.cpp)
-# target_link_libraries(range_libc_test Eigen3::Eigen)
-# TODO: rangelib
+add_executable(range_libc_test
+		src/range_libc_test.cpp
+		libs/src/range_lib/includes/kernels.cu
+		libs/src/range_lib/vendor/lodepng/lodepng.cpp)
+if (WITH_CUDA)
 
-# include_directories(include)
+	target_compile_definitions(range_libc_test PRIVATE USE_CUDA=1)
+	target_compile_definitions(range_libc_test PRIVATE CHUNK_SIZE=${CHUNK_SIZE})
+	target_compile_definitions(range_libc_test PRIVATE NUM_THREADS=${CHUNK_THREADS})
+
+	find_package(CUDA REQUIRED)
+	cuda_add_executable(range_libc_test ${CUDA_SRCS})
+
+else ()
+	target_compile_definitions(range_libc_test PRIVATE USE_CUDA=0)
+endif ()
+target_include_directories(range_libc_test PRIVATE libs/src/range_lib/includes)
+target_include_directories(range_libc_test PRIVATE libs/src/range_lib)
+target_link_libraries(range_libc_test Eigen3::Eigen)
