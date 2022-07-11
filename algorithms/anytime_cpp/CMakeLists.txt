@@ -49,7 +49,7 @@ target_link_libraries(low_variance_resampler Eigen3::Eigen)
 
 add_executable(functor_test
 		src/icp/functor_test.cpp
-		src/csv_utils.cpp)
+		src/csv_utils.cpp src/icp/icp_lvm_test.cpp)
 target_link_libraries(functor_test Eigen3::Eigen)
 target_link_libraries(functor_test lbfgspp)
 
