@@ -1,0 +1,7 @@
+joy:
+  ros__parameters:
+    device_id: 0
+    deadzone: 0.01
+    autorepeat_rate: 20.0
+    coalesce_interval: 0.01
+

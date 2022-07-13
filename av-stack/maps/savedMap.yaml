@@ -1,0 +1,7 @@
+image: /home/f1tenth2/f1tenth_ros2_ws/src/f1tenth_cmu_stack_cpp/maps/savedMap.pgm
+mode: trinary
+resolution: 0.01
+origin: [-6.05, -5.31, 0]
+negate: 0
+occupied_thresh: 0.725
+free_thresh: 0.19
