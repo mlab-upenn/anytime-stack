@@ -203,14 +203,17 @@ class Laser : public rclcpp::Node
 	std::vector<int> btns;
 	bool initial;
 	MatrixXf p, q, Tr, T;
-	
+    Matrix3f R_3;
+	Quaternionf q_orientation;
 	
 	public:
 	
 	Laser() : Node("Laser_control")
 	{
         initial = true;
+        R_3 = Eigen::Matrix3f::Identity();
 		laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/scan", 1, [this](sensor_msgs::msg::LaserScan::SharedPtr msg){ process_laser(msg); });
+        odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("icp/odom", 1);
 	}
 
 	private:
@@ -237,9 +240,29 @@ class Laser : public rclcpp::Node
 
         q = p;
 
+        R_3.block(0, 0, 2, 2) = Tr.block(0, 0, 2, 2);
+
+        q_orientation = R_3;
+
+        nav_msgs::msg::Odometry odom;
+        odom.header.frame_id = "odom";
+        odom.child_frame_id = "base_link";
+
+        // Position
+        odom.pose.pose.position.x = Tr(0, 2);
+        odom.pose.pose.position.y = Tr(1, 2);
+        odom.pose.pose.orientation.x = 0.0;
+        odom.pose.pose.orientation.y = 0.0;
+        odom.pose.pose.orientation.z = q_orientation.z();
+        odom.pose.pose.orientation.w = q_orientation.w();
+
+        odom_pub_->publish(odom);
+
+
 	}
 	
 	rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
+    rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
 };
 
 int main(int argc, char * argv[])
