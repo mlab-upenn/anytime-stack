@@ -111,11 +111,16 @@ struct ICPLoss : Functor<float>
 
         MatrixXf T = pose2tf(x);
 
+        MatrixXf R_dUdt(2, 2);
+        
+        R_dUdt << -sin(x(2)), -cos(x(2)),
+                   cos(x(2)), -sin(x(2));
+
         MatrixXf p_tf = transformPointCloud(p, T);
 
         MatrixXf d = p_tf - q;
 
-        MatrixXf p_rot = T.block(0, 0, 2, 2) * p;
+        MatrixXf p_rot = R_dUdt * p;
 
         fvec(0) = d(0, seq(0, n_pts-1)).sum();
         fvec(1) = d(1, seq(0, n_pts-1)).sum();
@@ -234,7 +239,7 @@ class Laser : public rclcpp::Node
 
         p = range2pc(r);
 
-        T = runICP(p, q, 25);
+        T = runICP(q, p, 25);
 
         Tr = Tr * T;
 

@@ -118,11 +118,11 @@ MatrixXf transformPointCloud(MatrixXf ptcloud, MatrixXf T)
 
     MatrixXf ptcloud_tf = MatrixXf::Constant(n_dims + 1, n_pts, 1.00);
 
-    ptcloud_tf(seq(0, 1), all) = ptcloud;
+    ptcloud_tf(seq(0, 1), seq(0, n_pts-1)) = ptcloud;
 
     ptcloud_tf = T * ptcloud_tf;
 
-    return ptcloud_tf(seq(0, 1), all);
+    return ptcloud_tf(seq(0, 1), seq(0, n_pts-1));
 }
 
 struct ICPLoss : Functor<float>
@@ -133,17 +133,24 @@ struct ICPLoss : Functor<float>
 
     int operator()(const Eigen::VectorXf &x, Eigen::VectorXf &fvec) const
     {
+        int n_pts = p.cols();
+
         MatrixXf T = pose2tf(x);
+        
+        MatrixXf R_dUdt(2, 2);
+        
+        R_dUdt << -sin(x(2)), -cos(x(2)),
+                   cos(x(2)), -sin(x(2));
 
         MatrixXf p_tf = transformPointCloud(p, T);
 
         MatrixXf d = p_tf - q;
 
-        MatrixXf p_rot = T.block(0, 0, 2, 2) * p;
+        MatrixXf p_rot = R_dUdt * p;
 
-        fvec(0) = d(0, all).sum();
-        fvec(1) = d(1, all).sum();
-        fvec(2) = (d(0, all).array() * p_rot(0, all).array() + d(1, all).array() * p_rot(1, all).array()).sum();
+        fvec(0) = d(0, seq(0, n_pts-1)).sum();
+        fvec(1) = d(1, seq(0, n_pts-1)).sum();
+        fvec(2) = (d(0, seq(0, n_pts-1)).array() * p_rot(0, seq(0, n_pts-1)).array() + d(1, seq(0, n_pts-1)).array() * p_rot(1, seq(0, n_pts-1)).array()).sum();
 
         return 0;
     }
@@ -203,11 +210,11 @@ MatrixXf runICP(MatrixXf p, MatrixXf q, int maxiters)
     {
         kdtree.query(p_tf, 1, indices, distances);
 
-        Map<Array<long long, Dynamic, Dynamic>> idx_long(indices.data(), indices.cols(), indices.rows());
+        Map<Array<long int, Dynamic, Dynamic>> idx_long(indices.data(), indices.cols(), indices.rows());
 
         ArrayXi idx = idx_long.cast <int> ();
 
-        MatrixXf q_knn = q(all, idx);
+        MatrixXf q_knn = q(seq(0, p.cols()-1), idx);
 
         x = solver(p_tf, q_knn);
 
