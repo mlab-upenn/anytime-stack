@@ -28,6 +28,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(slam_toolbox REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(Eigen3 REQUIRED)
+find_package(JetsonGPIO REQUIRED)
 
 
 if(BUILD_TESTING)
@@ -42,8 +43,8 @@ include_directories(/usr/local/include/eigen3/)
 add_executable(joy_code src/joystick_teleop_control_test.cpp)
 ament_target_dependencies(joy_code rclcpp std_msgs sensor_msgs ackermann_msgs nav_msgs nav2_msgs)
 
-add_executable(laser_code src/laser_icp.cpp)
-ament_target_dependencies(laser_code rclcpp std_msgs sensor_msgs ackermann_msgs nav_msgs nav2_msgs Eigen3)
+add_executable(laser_icp src/laser_icp.cpp)
+ament_target_dependencies(laser_icp rclcpp std_msgs sensor_msgs ackermann_msgs nav_msgs nav2_msgs Eigen3)
 
 add_executable(tf_publish src/tf_publisher.cpp)
 ament_target_dependencies(tf_publish rclcpp nav_msgs tf2_ros geometry_msgs)
@@ -51,11 +52,20 @@ ament_target_dependencies(tf_publish rclcpp nav_msgs tf2_ros geometry_msgs)
 add_executable(tf_publish_slam src/tf_publisher_mapping.cpp)
 ament_target_dependencies(tf_publish_slam rclcpp nav_msgs tf2_ros geometry_msgs)
 
+add_executable(gpio_read src/gpio_read.cpp)
+ament_target_dependencies(gpio_read rclcpp std_msgs Eigen3 JetsonGPIO)
+
+add_executable(gpio_write src/gpio_write.cpp)
+ament_target_dependencies(gpio_write rclcpp std_msgs Eigen3 JetsonGPIO)
+
+
 install(TARGETS
   joy_code
-  laser_code
+  laser_icp
   tf_publish
   tf_publish_slam
+  gpio_read
+  gpio_write
   DESTINATION lib/${PROJECT_NAME})
   
  

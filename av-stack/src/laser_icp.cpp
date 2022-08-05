@@ -74,7 +74,7 @@ MatrixXf pose2tf(VectorXf x)
     MatrixXf R = MatrixXf::Zero(2, 2);
 
     R << cos(x(2)), -sin(x(2)),
-            sin(x(2)), cos(x(2));
+         sin(x(2)), cos(x(2));
 
     MatrixXf T = MatrixXf::Identity(3, 3);
 
@@ -173,7 +173,7 @@ MatrixXf runICP(MatrixXf p, MatrixXf q, int maxiters)
 
     kdtree.setMaxDistance(0);
 
-    kdtree.setThreads(6);
+    kdtree.setThreads(0);
 
     kdtree.build();
 
@@ -218,7 +218,7 @@ class Laser : public rclcpp::Node
         initial = true;
         R_3 = Eigen::Matrix3f::Identity();
 		laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/scan", 1, [this](sensor_msgs::msg::LaserScan::SharedPtr msg){ process_laser(msg); });
-        odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("icp/odom", 1);
+        odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("/icp/odom", 1);
 	}
 
 	private:
@@ -239,7 +239,7 @@ class Laser : public rclcpp::Node
 
         p = range2pc(r);
 
-        T = runICP(q, p, 25);
+        T = runICP(p, q, 25);
 
         Tr = Tr * T;
 

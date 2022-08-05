@@ -24,7 +24,7 @@ public:
   {
     tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
 
-    ekf_odom_ = this->create_subscription<nav_msgs::msg::Odometry>("/vesc/odom", 1, std::bind(&FramePublisher::process_ekf_odom, this, _1));
+    ekf_odom_ = this->create_subscription<nav_msgs::msg::Odometry>("/icp/odom", 1, std::bind(&FramePublisher::process_ekf_odom, this, _1));
     
     //ekf_odom_ = this->create_subscription<nav_msgs::msg::Odometry>("/pf/pose/odom", 1, std::bind(&FramePublisher::process_ekf_odom, this, _1));
 

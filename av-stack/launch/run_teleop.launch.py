@@ -129,8 +129,8 @@ def generate_launch_description():
     )
     laser_node = Node(
         package = 'av-stack',
-        executable='laser_code',
-        name = 'laser_node',
+        executable='laser_icp',
+        name = 'laser_icp',
         output = 'screen'
     )  
     tf_publish_node = Node(
@@ -155,6 +155,7 @@ def generate_launch_description():
     ld.add_action(ackermann_mux_node)
     ld.add_action(tf_publish_node)
     ld.add_action(joy_teleop_node)
+    ld.add_action(laser_node)
 
 
     return ld
