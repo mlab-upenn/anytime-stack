@@ -1,7 +1,0 @@
-/snap/clion/198/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/198/bin/ninja/linux/ninja -G Ninja -S /home/schmidd/Documents/Github/anytime-stack/algorithms/anytime_cpp/src/icp -B /home/schmidd/Documents/Github/anytime-stack/algorithms/anytime_cpp/src/icp/cmake-build-debug
--- CMAKE_PREFIX_PATH CMake variable = /home/schmidd/Documents/Github/anytime-stack/algorithms/anytime_cpp/src/icp/libs/install
--- CMAKE_PREFIX_PATH env variable = 
--- Eigen3 version: 
--- Configuring done
--- Generating done
--- Build files have been written to: /home/schmidd/Documents/Github/anytime-stack/algorithms/anytime_cpp/src/icp/cmake-build-debug

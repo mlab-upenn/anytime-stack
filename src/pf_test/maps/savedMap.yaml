@@ -1,7 +1,0 @@
-image: /home/schmidd/ros_ws/src/pf_test/maps/savedMap.pgm
-mode: trinary
-resolution: 0.04
-origin: [-7.22, -17.7, 0]
-negate: 0
-occupied_thresh: 0.725
-free_thresh: 0.19
