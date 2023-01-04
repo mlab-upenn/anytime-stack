@@ -59,7 +59,7 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 * Publishes to:
     * /drive
 * Subscribes to:
-    * icp/odom
+    * /icp/odom
     * /joy
     * /scan
 * Shared Memory Communication
