@@ -37,6 +37,8 @@ Anytime compute is a framework that can allow the controller to exploit the natu
     * icp/odom
 * Subscribes to:
     * /scan
+* Shared Memory Communication
+    * anytime_stanley
 
 ### anytime_stanley
 * Parameters
@@ -52,6 +54,8 @@ Anytime compute is a framework that can allow the controller to exploit the natu
     * icp/odom
     * /joy
     * /scan
+* Shared Memory Communication
+    * icp
 
 ## Parameters and topics for dependencies
 
