@@ -6,6 +6,13 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 
 **See Anytime_Compute_Study_README.pdf for details**
 
+## Structure
+
+* anytime-stack is a ROS 2 workspace, `src` contains ROS 2 packages as usual
+* [anytime-icp-stack](./anytime-stack/src/anytime-icp-stack) directory contains the main implementation
+	* [anytime-icp-stack/src/laser_icp_cpp](./anytime-stack/src/anytime-icp-stack/src/laser_icp.cpp) – Contains the main Anytime ICP Node with the shared memory interface
+	* [anytime-icp-stack/src/anytime_stanley_controller_cpp](./anytime-stack/src/anytime-icp-stack/src/anytime_stanley_controller.cpp) – Contains the main Anytime Stanley Controller Node with the shared memory interface
+
 ## External Dependecies
 
 * [ackermann_msgs] [https://index.ros.org/r/ackermann_msgs/#foxy].
@@ -106,16 +113,6 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 * Subscribes to:
     * sensors/core
     * sensors/servo_position_command
-
-
-## Structure
-
-* the project root is a ROS 2 workspace, `src` contains ROS 2 packages as usual
-* [algorithms](./algorithms) directory contains non-ROS code (algorithms implementations in Python and C++)
-	* [algorithms/anytime_cpp](./algorithms/anytime_cpp) – CMake project with all C++ algorithms implementations
-	* [algorithms/icp_py](./algorithms/icp_py) – Python algorithms implementations
-	* [algorithms/pf_data_collection](./algorithms/pf_data_collection) – scripts for Particle Filter data collection
-
 
 ## Development
 
