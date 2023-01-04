@@ -22,6 +22,7 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 * [vesc] GitHub - f1tenth/vesc at ros2. This is the driver for VESCs in ROS 2.
 * [ackermann_mux] GitHub - f1tenth/ackermann_mux: Twist multiplexer. This is a package for multiplexing ackermann messages in ROS 2.
 * [eigen3][https://eigen.tuxfamily.org/dox/GettingStarted.html]
+* [libInterpolate][https://github.com/CD3/libInterpolate]
 
 
 ## Nodes launched during startup
