@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    k_gain: 0.60
+    speed: 2.50
+    slope: 0.00
+    intercept: 9.95
+    steering_max: 1.60
+    time_to_collision: 0.70
