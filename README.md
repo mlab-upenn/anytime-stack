@@ -32,76 +32,76 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 
 ### icp
 * Parameters
-    *max_iterations
+    * max_iterations
 * Publishes to:
-    *icp/odom
+    * icp/odom
 * Subscribes to:
-    */scan
+    * /scan
 
 ### anytime_stanley
 * Parameters
-    *k_gain
-    *speed
-    *slope
-    *intercept
-    *steering_max
-    *time_to_collision
+    * k_gain
+    * speed
+    * slope
+    * intercept
+    * steering_max
+    * time_to_collision
 * Publishes to:
-    */drive
+    * /drive
 * Subscribes to:
-    *icp/odom
-    */joy
-    */scan
+    * icp/odom
+    * /joy
+    * /scan
 
 ## Parameters and topics for dependencies
 
 ### vesc_driver
 * Parameters:
-    *duty_cycle_min, duty_cycle_max
-    *current_min, current_max
-    *brake_min, brake_max
-    *speed_min, speed_max
-    *position_min, position_max
-    *servo_min, servo_max
+    * duty_cycle_min, duty_cycle_max
+    * current_min, current_max
+    * brake_min, brake_max
+    * speed_min, speed_max
+    * position_min, position_max
+    * servo_min, servo_max
 * Publishes to:
-    *sensors/core
-    *sensors/servo_position_command
-    *sensors/imu
-    *sensors/imu/raw
+    * sensors/core
+    * sensors/servo_position_command
+    * sensors/imu
+    * sensors/imu/raw
 * Subscribes to:
-    *commands/motor/duty_cycle
-    *commands/motor/current
-    *commands/motor/brake
-    *commands/motor/speed
-    *commands/motor/position
-    *commands/servo/position
+    * commands/motor/duty_cycle
+    * commands/motor/current
+    * commands/motor/brake
+    * commands/motor/speed
+    * commands/motor/position
+    * commands/servo/position
 ### ackermann_to_vesc
 * Parameters:
-    *speed_to_erpm_gain
-    *speed_to_erpm_offset
-    *steering_angle_to_servo_gain
-    *steering_angle_to_servo_offset
+    * speed_to_erpm_gain
+    * speed_to_erpm_offset
+    * steering_angle_to_servo_gain
+    * steering_angle_to_servo_offset
 * Publishes to:
-    *ackermann_cmd
+    * ackermann_cmd
 * Subscribes to:
-    *commands/motor/speed
-    *commands/servo/position
+    * commands/motor/speed
+    * commands/servo/position
 ### vesc_to_odom
 * Parameters:
-    *odom_frame
-    *base_frame
-    *use_servo_cmd_to_calc_angular_velocity
-    *speed_to_erpm_gain
-    *speed_to_erpm_offset
-    *steering_angle_to_servo_gain
-    *steering_angle_to_servo_offset
-    *wheelbase
-    *publish_tf
+    * odom_frame
+    * base_frame
+    * use_servo_cmd_to_calc_angular_velocity
+    * speed_to_erpm_gain
+    * speed_to_erpm_offset
+    * steering_angle_to_servo_gain
+    * steering_angle_to_servo_offset
+    * wheelbase
+    * publish_tf
 * Publishes to:
-    *odom
+    * odom
 * Subscribes to:
-    *sensors/core
-    *sensors/servo_position_command
+    * sensors/core
+    * sensors/servo_position_command
 
 
 ## Structure
@@ -125,9 +125,9 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 
 ### Note about sourcing
 
-**Note!    *Always use a separate terminal windows/tabs for building and running.
+**Note!    * Always use a separate terminal windows/tabs for building and running.
 
-In a terminal window/tab where you are building the workspace, you must source **only    *the ROS 2
+In a terminal window/tab where you are building the workspace, you must source **only    * the ROS 2
 (i.e., `source /opt/ros/foxy.setup.bash`).
 
 Then, in other terminal windows/tabs you can source the built workspace (`source install/setup.bash`) and run the
