@@ -9,7 +9,7 @@ Anytime compute is a framework that can allow the controller to exploit the natu
 ## Structure
 
 * anytime-stack is a ROS 2 workspace, `src` contains ROS 2 packages as usual
-* [anytime-icp-stack](./anytime-stack/src/anytime-icp-stack) directory contains the main implementation
+* [anytime-icp-stack](./anytime-icp/src/anytime-icp-stack/) directory contains the main implementation
 	* [anytime-icp-stack/src/laser_icp.cpp](./anytime-icp/src/anytime-icp-stack/src/laser_icp.cpp) – Contains the main Anytime ICP Node with the shared memory interface
 	* [anytime-icp-stack/src/anytime_stanley_controller.cpp](./anytime-icp/src/anytime-icp-stack/src/anytime_stanley_controller.cpp) – Contains the main Anytime Stanley Controller Node with the shared memory interface
 
