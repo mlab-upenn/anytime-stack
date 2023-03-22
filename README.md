@@ -2,7 +2,7 @@
 
 Anytime Autonomy Project
 
-Anytime compute is a framework that can allow the controller to exploit the natural trade-off between the estimator's speed and accuracy during runtime by specifying a time of completion $\delta$ and error bound $\epsilon$, in the form of a contract specified by the controller based on its immediate control objectives.
+Anytime compute is a framework that can allow a local planner to exploit the natural trade-off between the estimator's speed and accuracy during runtime by specifying a time of completion $\delta$ and error bound $\epsilon$, in the form of a contract specified by the controller based on its immediate control objectives.
 
 **See Anytime_Compute_Study_README.pdf for details**
 
